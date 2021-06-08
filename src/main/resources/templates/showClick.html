@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Clicker</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="scripts/script.js"></script>
+</head>
+
+<body>
+<h2>Click: </h2>
+<form method="post" onMouseOver="changecolor('green')"
+      onMouseOut="changecolor('unknownn')">
+    <button type="submit" class="button">Click</button>
+</form>
+    <h2>Counter: </h2>
+    <p th:text=${number}></p>
+
+</body>
+</html>
