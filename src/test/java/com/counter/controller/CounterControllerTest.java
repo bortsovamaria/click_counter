@@ -1,24 +1,59 @@
 package com.counter.controller;
 
-import com.counter.service.ICountService;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+
+@RunWith(SpringRunner.class)
 @SpringBootTest
-public class CounterControllerTest {
+@AutoConfigureMockMvc
+@TestPropertySource("/application-test.properties")
+class CounterControllerTest {
 
     @Autowired
-    private ICountService countService;
+    private MockMvc mockMvc;
 
 
     @Test
-    public void getCountTest() {
-
-        Long count = countService.getCount();
-        Assertions.assertNotNull(count);
-        Assertions.assertTrue(count >= 0);
-
+    public void mainTest() throws Exception {
+        mockMvc.perform(get("/"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andReturn()
+                .getResponse()
+                .getContentAsString()
+                .contains("CLICKER");
     }
+
+    @Test
+    public void greetingTest() throws Exception {
+        mockMvc.perform(get("/greeting"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andReturn()
+                .getResponse()
+                .getContentAsString()
+                .contains("Hello");
+    }
+
+    @Test
+    public void showClickTest() throws Exception {
+        mockMvc.perform(get("/showClick"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andReturn()
+                .getResponse()
+                .getContentAsString()
+                .contains("Counter");
+    }
+
 }

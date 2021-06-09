@@ -5,17 +5,20 @@ h2 {
     text-transform: capitalize;
 }
 
-h1 + p {
-    font-weight: bold;
-}
-
 p {
     text-align:center;
     font-size: 30px;
-    color: red;
+    color: coral;
     font-family: Helvetica, Arial, sans-serif;
+    font-weight: bold;
 }
 
 form {
     text-align:center;
+}
+
+.non-center {
+    text-align: left;
+    font-size: 15px;
+    color: black;
 }
